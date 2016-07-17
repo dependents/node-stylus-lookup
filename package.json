@@ -1,6 +1,6 @@
 {
   "name": "stylus-lookup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get the file associated with an imported/required Stylus partial",
   "main": "index.js",
   "directories": {
