@@ -1,6 +1,5 @@
 var path = require('path');
 var fs = require('fs');
-var isRelativePath = require('is-relative-path');
 var debug = require('debug')('stylus-lookup');
 
 /**
@@ -23,7 +22,7 @@ module.exports = function(dep, filename, directory) {
   var ext = path.extname(dep) ? '' : path.extname(filename);
   var resolved;
 
-  if (isRelativePath(dep)) {
+  if (!path.isAbsolute(dep)) {
     resolved = path.resolve(filename, dep) + ext;
 
     debug('resolved relative dependency: ' + resolved);
