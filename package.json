@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "Get the file associated with an imported/required Stylus partial",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "directories": {
     "test": "test"
   },
