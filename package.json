@@ -32,9 +32,9 @@
   },
   "homepage": "https://github.com/mrjoelkemp/node-stylus-lookup",
   "devDependencies": {
-    "jscs": "~1.13.1",
-    "mocha": "~2.2.5",
-    "mock-fs": "~3.0.0"
+    "jscs": "^3.0.7",
+    "mocha": "^4.1.0",
+    "mock-fs": "^4.4.2"
   },
   "dependencies": {
     "commander": "~2.8.1",
