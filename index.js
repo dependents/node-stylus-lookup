@@ -1,6 +1,8 @@
-var path = require('path');
-var fs = require('fs');
-var debug = require('debug')('stylus-lookup');
+'use strict';
+
+const path = require('path');
+const fs = require('fs');
+const debug = require('debug')('stylus-lookup');
 
 /**
  * Determines the resolved dependency path according to
@@ -12,15 +14,15 @@ var debug = require('debug')('stylus-lookup');
  * @return {String}
  */
 module.exports = function(dep, filename, directory) {
-  var fileDir = path.dirname(filename);
+  const fileDir = path.dirname(filename);
 
   debug('trying to resolve: ' + dep);
   debug('filename: ', filename);
   debug('directory: ', directory);
 
   // Use the file's extension if necessary
-  var ext = path.extname(dep) ? '' : path.extname(filename);
-  var resolved;
+  const ext = path.extname(dep) ? '' : path.extname(filename);
+  let resolved;
 
   if (!path.isAbsolute(dep)) {
     resolved = path.resolve(filename, dep) + ext;
@@ -34,7 +36,7 @@ module.exports = function(dep, filename, directory) {
     }
   }
 
-  var samedir = path.resolve(fileDir, dep) + ext;
+  const samedir = path.resolve(fileDir, dep) + ext;
   debug('resolving dep about the parent file\'s directory: ' + samedir);
 
   if (fs.existsSync(samedir)) {
@@ -44,7 +46,7 @@ module.exports = function(dep, filename, directory) {
   }
 
   // Check for dep/index.styl file
-  var indexFile = path.join(path.resolve(fileDir, dep), 'index.styl');
+  const indexFile = path.join(path.resolve(fileDir, dep), 'index.styl');
   debug('resolving dep as if it points to an index.styl file: ' + indexFile);
 
   if (fs.existsSync(indexFile)) {
