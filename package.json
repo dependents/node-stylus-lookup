@@ -37,7 +37,7 @@
     "mock-fs": "^4.4.2"
   },
   "dependencies": {
-    "commander": "~2.8.1",
+    "commander": "^2.8.1",
     "debug": "^3.1.0",
     "is-relative-path": "~1.0.0"
   }
