@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "Get the file associated with an imported/required Stylus partial",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "directories": {
     "test": "test"
   },
@@ -29,13 +32,12 @@
   },
   "homepage": "https://github.com/mrjoelkemp/node-stylus-lookup",
   "devDependencies": {
-    "jscs": "~1.13.1",
-    "mocha": "~2.2.5",
-    "mock-fs": "~3.0.0"
+    "jscs": "^3.0.7",
+    "mocha": "^4.1.0",
+    "mock-fs": "^4.4.2"
   },
   "dependencies": {
-    "commander": "~2.8.1",
-    "debug": "^3.1.0",
-    "is-relative-path": "~1.0.0"
+    "commander": "^2.8.1",
+    "debug": "^3.1.0"
   }
 }
