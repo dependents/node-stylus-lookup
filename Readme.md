@@ -15,9 +15,13 @@ partials using the `index.styl` resolution.
 
 ### Usage
 
-`stylusLookup(dependencyName, filename, directory)`
+`stylusLookup({
+  dependency: 'foo',
+  filename: 'path/to/file',
+  directory: 'path/to/all/files'
+})`
 
-* `dependencyName`: The partial's name
+* `dependency`: The partial's name
   * If your stylus file had `@import foo`, then `foo` would be the dependency name
 * `filename`: The file importing the dependency
 * `directory`: The location of all stylus files
@@ -27,7 +31,11 @@ Example:
 ```js
 var stylusLookup = require('stylus-lookup');
 
-stylusLookup('variables', 'app/styles/styles.styl', 'app/styles'); // yields app/styles/variables.styl
+stylusLookup({
+  dependency: 'variables',
+  filename: 'app/styles/styles.styl',
+  directory: 'app/styles'
+}); // yields app/styles/variables.styl
 ```
 
 * This assumes that the file `app/styles/styles.styl` has `@import variables` or `@require variables`
