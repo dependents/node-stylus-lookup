@@ -8,12 +8,23 @@ const debug = require('debug')('stylus-lookup');
  * Determines the resolved dependency path according to
  * the Stylus compiler's dependency lookup behavior
  *
- * @param  {String} dep - the import name
- * @param  {String} filename - the file containing the import
- * @param  {String} directory - the location of all stylus files
+ * @param  {Object} options
+ * @param  {String} options.dependency - the import name
+ * @param  {String} options.filename - the file containing the import
+ * @param  {String} options.directory - the location of all stylus files
  * @return {String}
  */
-module.exports = function(dep, filename, directory) {
+module.exports = function({dependency: dep, filename, directory} = {}) {
+  if (typeof dep === 'undefined') {
+    throw new Error('dependency is not supplied');
+  }
+  if (typeof filename === 'undefined') {
+    throw new Error('filename is not supplied');
+  }
+  if (typeof directory === 'undefined') {
+    throw new Error('directory is not supplied');
+  }
+
   const fileDir = path.dirname(filename);
 
   debug('trying to resolve: ' + dep);

@@ -25,32 +25,56 @@ describe('stylus-lookup', function() {
   afterEach(mock.restore);
 
   it('handles index.styl lookup', function() {
-    assert.equal(lookup('blueprint', 'example/main.styl', 'example'),
+    assert.equal(lookup({
+      dependency: 'blueprint',
+      filename: 'example/main.styl',
+      directory: 'example'
+    }),
       process.cwd() + '/example/blueprint/index.styl');
   });
 
   it('handles .css lookups', function() {
-    assert.equal(lookup('styles2.css', 'example/styles.styl', 'example'),
+    assert.equal(lookup({
+      dependency: 'styles2.css',
+      filename:  'example/styles.styl',
+      directory: 'example'
+    }),
       process.cwd() + '/example/styles2.css');
   });
 
   it('handles same directory lookup', function() {
-    assert.equal(lookup('another', 'example/main.styl', 'example'),
+    assert.equal(lookup({
+      dependency: 'another',
+      filename: 'example/main.styl',
+      directory: 'example'
+    }),
       process.cwd() + '/example/another.styl');
   });
 
   it('handles subdirectory lookup', function() {
-    assert.equal(lookup('nested/foo', 'example/another.styl', 'example'),
+    assert.equal(lookup({
+      dependency: 'nested/foo',
+      filename:  'example/another.styl',
+      directory: 'example'
+    }),
       process.cwd() + '/example/nested/foo.styl');
   });
 
   it('handles extensionless lookup', function() {
-    assert.equal(lookup('another', 'example/main.styl', 'example'),
+    assert.equal(lookup({
+      dependency: 'another',
+      filename: 'example/main.styl',
+      directory: 'example'
+    }),
       process.cwd() + '/example/another.styl');
   });
 
   it('handles extensioned lookup', function() {
-    assert.equal(lookup('styles.styl', 'example/main.styl', 'example'),
+    assert.equal(lookup({
+      dependency: 'styles.styl',
+      filename:  'example/main.styl',
+      directory: 'example'
+    }),
       process.cwd() + '/example/styles.styl');
   });
 
