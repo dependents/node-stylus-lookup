@@ -33,11 +33,11 @@
   "homepage": "https://github.com/mrjoelkemp/node-stylus-lookup",
   "devDependencies": {
     "jscs": "^3.0.7",
-    "mocha": "^4.1.0",
+    "mocha": "^5.2.0",
     "mock-fs": "^4.4.2"
   },
   "dependencies": {
     "commander": "^2.8.1",
-    "debug": "^3.1.0"
+    "debug": "^4.1.0"
   }
 }
