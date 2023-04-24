@@ -24,8 +24,8 @@ module.exports = function({ dependency: dep, filename, directory } = {}) {
   const fileDir = path.dirname(filename);
 
   debug(`trying to resolve: ${dep}`);
-  debug('filename: ', filename);
-  debug('directory: ', directory);
+  debug(`filename: ${filename}`);
+  debug(`directory: ${directory}`);
 
   // Use the file's extension if necessary
   const ext = path.extname(dep) ? '' : path.extname(filename);
@@ -41,10 +41,10 @@ module.exports = function({ dependency: dep, filename, directory } = {}) {
     debug('resolved file does not exist');
   }
 
-  const samedir = path.resolve(fileDir, dep) + ext;
-  debug(`resolving dep about the parent file's directory: ${samedir}`);
+  const sameDir = path.resolve(fileDir, dep) + ext;
+  debug(`resolving dep about the parent file's directory: ${sameDir}`);
 
-  if (fs.existsSync(samedir)) return samedir;
+  if (fs.existsSync(sameDir)) return sameDir;
 
   debug('resolved file does not exist');
 
