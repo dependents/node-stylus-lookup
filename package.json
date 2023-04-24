@@ -3,21 +3,23 @@
   "version": "3.0.2",
   "description": "Get the file associated with an imported/required Stylus partial",
   "main": "index.js",
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "bin/cli.js",
+    "index.js"
+  ],
   "bin": {
     "stylus-lookup": "bin/cli.js"
   },
   "scripts": {
-    "test": "jscs -p google test index.js bin && mocha"
+    "lint": "xo",
+    "fix": "xo --fix",
+    "uvu": "uvu test -i fixtures",
+    "test": "npm run lint && npm run uvu",
+    "test:ci": "c8 npm run uvu"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrjoelkemp/node-stylus-lookup.git"
+    "url": "git+https://github.com/dependents/node-stylus-lookup.git"
   },
   "keywords": [
     "stylus",
@@ -25,19 +27,62 @@
     "dependency",
     "partial"
   ],
-  "author": "Joel Kemp <joel@mrjoelkemp.com> (http://www.mrjoelkemp.com/)",
+  "author": "Joel Kemp <joel@mrjoelkemp.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mrjoelkemp/node-stylus-lookup/issues"
+    "url": "https://github.com/dependents/node-stylus-lookup/issues"
   },
-  "homepage": "https://github.com/mrjoelkemp/node-stylus-lookup",
-  "devDependencies": {
-    "jscs": "^3.0.7",
-    "mocha": "^5.2.0",
-    "mock-fs": "^4.4.2"
+  "homepage": "https://github.com/dependents/node-stylus-lookup",
+  "engines": {
+    "node": ">=12"
   },
   "dependencies": {
-    "commander": "^2.8.1",
-    "debug": "^4.1.0"
+    "commander": "^9.5.0"
+  },
+  "devDependencies": {
+    "c8": "^7.13.0",
+    "mock-fs": "^5.2.0",
+    "uvu": "^0.5.6",
+    "xo": "^0.52.4"
+  },
+  "xo": {
+    "space": true,
+    "ignores": [
+      "test/fixtures/*"
+    ],
+    "rules": {
+      "arrow-body-style": "off",
+      "capitalized-comments": "off",
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "max-nested-callbacks": [
+        "error",
+        5
+      ],
+      "operator-linebreak": [
+        "error",
+        "after"
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "prefer-template": "error",
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ],
+      "unicorn/prefer-module": "off",
+      "unicorn/prefer-node-protocol": "off",
+      "unicorn/prefer-top-level-await": "off",
+      "unicorn/prefer-type-error": "off",
+      "unicorn/prevent-abbreviations": "off"
+    }
   }
 }
