@@ -1,4 +1,4 @@
-### stylus-lookup [![npm](http://img.shields.io/npm/v/stylus-lookup.svg)](https://npmjs.org/package/stylus-lookup) [![npm](http://img.shields.io/npm/dm/stylus-lookup.svg)](https://npmjs.org/package/stylus-lookup)
+### stylus-lookup [![CI](https://img.shields.io/github/actions/workflow/status/dependents/node-stylus-lookup/ci.yml?branch=main&label=CI&logo=github)](https://github.com/dependents/node-stylus-lookup/actions/workflows/ci.yml?query=branch%3Amain) [![npm version](https://img.shields.io/npm/v/stylus-lookup?logo=npm&logoColor=fff)](https://www.npmjs.com/package/stylus-lookup) [![npm downloads](https://img.shields.io/npm/dm/stylus-lookup)](https://www.npmjs.com/package/stylus-lookup)
 
 > Get the file associated with a Stylus import
 
@@ -11,15 +11,17 @@ partials using the `index.styl` resolution.
 
 * **Does not** currently support glob imports or the use of additional paths. PRs welcome.
 
-*Originally built for [Dependents](https://github.com/mrjoelkemp/Dependents#dependents)*
+*Originally built for [Dependents](https://github.com/dependents/Dependents)*
 
 ### Usage
 
-`stylusLookup({
+```js
+stylusLookup({
   dependency: 'foo',
   filename: 'path/to/file',
   directory: 'path/to/all/files'
-})`
+});
+```
 
 * `dependency`: The partial's name
   * If your stylus file had `@import foo`, then `foo` would be the dependency name
@@ -29,7 +31,7 @@ partials using the `index.styl` resolution.
 Example:
 
 ```js
-var stylusLookup = require('stylus-lookup');
+const stylusLookup = require('stylus-lookup');
 
 stylusLookup({
   dependency: 'variables',
