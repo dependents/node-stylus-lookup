@@ -1,4 +1,8 @@
-### stylus-lookup [![CI](https://img.shields.io/github/actions/workflow/status/dependents/node-stylus-lookup/ci.yml?branch=main&label=CI&logo=github)](https://github.com/dependents/node-stylus-lookup/actions/workflows/ci.yml?query=branch%3Amain) [![npm version](https://img.shields.io/npm/v/stylus-lookup?logo=npm&logoColor=fff)](https://www.npmjs.com/package/stylus-lookup) [![npm downloads](https://img.shields.io/npm/dm/stylus-lookup)](https://www.npmjs.com/package/stylus-lookup)
+# stylus-lookup
+
+[![CI](https://img.shields.io/github/actions/workflow/status/dependents/node-stylus-lookup/ci.yml?branch=main&label=CI&logo=github)](https://github.com/dependents/node-stylus-lookup/actions/workflows/ci.yml?query=branch%3Amain)
+[![npm version](https://img.shields.io/npm/v/stylus-lookup?logo=npm&logoColor=fff)](https://www.npmjs.com/package/stylus-lookup)
+[![npm downloads](https://img.shields.io/npm/dm/stylus-lookup)](https://www.npmjs.com/package/stylus-lookup)
 
 > Get the file associated with a Stylus import
 
@@ -13,7 +17,7 @@ partials using the `index.styl` resolution.
 
 *Originally built for [Dependents](https://github.com/dependents/Dependents)*
 
-### Usage
+## Usage
 
 ```js
 stylusLookup({
@@ -42,3 +46,17 @@ stylusLookup({
 
 * This assumes that the file `app/styles/styles.styl` has `@import variables` or `@require variables`
 and that all of the other stylus files are located within `app/styles`.
+
+## CLI
+
+*Assumes a global install stylus-lookup with `npm install -g stylus-lookup`*
+
+```sh
+stylus-lookup [options] path/to/file
+```
+
+Run `stylus-lookup --help` to see all the options.
+
+## License
+
+[MIT](LICENSE)
