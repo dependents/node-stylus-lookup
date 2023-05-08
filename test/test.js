@@ -32,21 +32,21 @@ testSuite('throws if dependency is not supplied', () => {
   assert.throws(() => lookup({
     filename: 'example/baz.styl',
     directory: 'example'
-  }), Error, 'dependency is not a supplied');
+  }), err => err instanceof Error && err.message === 'dependency is not supplied');
 });
 
 testSuite('throws if filename is not supplied', () => {
   assert.throws(() => lookup({
     dependency: 'blueprint',
     directory: 'example'
-  }), Error, 'filename is not a supplied');
+  }), err => err instanceof Error && err.message === 'filename is not supplied');
 });
 
 testSuite('throws if directory is not supplied', () => {
   assert.throws(() => lookup({
     dependency: 'blueprint',
     filename: 'example/baz.styl'
-  }), Error, 'directory is not a supplied');
+  }), err => err instanceof Error && err.message === 'directory is not supplied');
 });
 
 testSuite('handles index.styl lookup', () => {
