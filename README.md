@@ -20,6 +20,8 @@ partials using the `index.styl` resolution.
 ## Usage
 
 ```js
+const stylusLookup = require('stylus-lookup');
+
 stylusLookup({
   dependency: 'foo',
   filename: 'path/to/file',
@@ -49,7 +51,7 @@ and that all of the other stylus files are located within `app/styles`.
 
 ## CLI
 
-*Assumes a global install stylus-lookup with `npm install -g stylus-lookup`*
+Assumes a global install of stylus-lookup with `npm install -g stylus-lookup`
 
 ```sh
 stylus-lookup [options] path/to/file
