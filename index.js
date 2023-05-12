@@ -16,23 +16,23 @@ const debug = debuglog('stylus-lookup');
  * @param  {String} options.directory - the location of all stylus files
  * @return {String}
  */
-module.exports = function({ dependency: dep, filename, directory } = {}) {
-  if (dep === undefined) throw new Error('dependency is not supplied');
+module.exports = function({ dependency, filename, directory } = {}) {
+  if (dependency === undefined) throw new Error('dependency is not supplied');
   if (filename === undefined) throw new Error('filename is not supplied');
   if (directory === undefined) throw new Error('directory is not supplied');
 
   const fileDir = path.dirname(filename);
 
-  debug(`trying to resolve: ${dep}`);
+  debug(`trying to resolve: ${dependency}`);
   debug(`filename: ${filename}`);
   debug(`directory: ${directory}`);
 
   // Use the file's extension if necessary
-  const ext = path.extname(dep) ? '' : path.extname(filename);
+  const ext = path.extname(dependency) ? '' : path.extname(filename);
   let resolved;
 
-  if (!path.isAbsolute(dep)) {
-    resolved = path.resolve(filename, dep) + ext;
+  if (!path.isAbsolute(dependency)) {
+    resolved = path.resolve(filename, dependency) + ext;
 
     debug(`resolved relative dependency: ${resolved}`);
 
@@ -41,16 +41,16 @@ module.exports = function({ dependency: dep, filename, directory } = {}) {
     debug('resolved file does not exist');
   }
 
-  const sameDir = path.resolve(fileDir, dep) + ext;
-  debug(`resolving dep about the parent file's directory: ${sameDir}`);
+  const sameDir = path.resolve(fileDir, dependency) + ext;
+  debug(`resolving dependency about the parent file's directory: ${sameDir}`);
 
   if (fs.existsSync(sameDir)) return sameDir;
 
   debug('resolved file does not exist');
 
-  // Check for dep/index.styl file
-  const indexFile = path.join(path.resolve(fileDir, dep), 'index.styl');
-  debug(`resolving dep as if it points to an index.styl file: ${indexFile}`);
+  // Check for dependency/index.styl file
+  const indexFile = path.join(path.resolve(fileDir, dependency), 'index.styl');
+  debug(`resolving dependency as if it points to an index.styl file: ${indexFile}`);
 
   if (fs.existsSync(indexFile)) return indexFile;
 
