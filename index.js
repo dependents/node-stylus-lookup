@@ -29,10 +29,9 @@ module.exports = function({ dependency, filename, directory } = {}) {
 
   // Use the file's extension if necessary
   const ext = path.extname(dependency) ? '' : path.extname(filename);
-  let resolved;
 
   if (!path.isAbsolute(dependency)) {
-    resolved = path.resolve(filename, dependency) + ext;
+    const resolved = path.resolve(filename, dependency) + ext;
 
     debug(`resolved relative dependency: ${resolved}`);
 
