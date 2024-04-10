@@ -50,7 +50,7 @@ testSuite('throws if directory is not supplied', () => {
 });
 
 testSuite('handles index.styl lookup', () => {
-  const expected = path.normalize(`${process.cwd()}/example/blueprint/index.styl`);
+  const expected = path.join(process.cwd(), '/example/blueprint/index.styl');
   const actual = lookup({
     dependency: 'blueprint',
     filename: 'example/styles.styl',
@@ -61,7 +61,7 @@ testSuite('handles index.styl lookup', () => {
 });
 
 testSuite('handles .css lookups', () => {
-  const expected = path.normalize(`${process.cwd()}/example/styles2.css`);
+  const expected = path.join(process.cwd(), '/example/styles2.css');
   const actual = lookup({
     dependency: 'styles2.css',
     filename: 'example/styles.styl',
@@ -72,7 +72,7 @@ testSuite('handles .css lookups', () => {
 });
 
 testSuite('handles same directory lookup', () => {
-  const expected = path.normalize(`${process.cwd()}/example/another.styl`);
+  const expected = path.join(process.cwd(), '/example/another.styl');
   const actual = lookup({
     dependency: 'another',
     filename: 'example/main.styl',
@@ -83,7 +83,7 @@ testSuite('handles same directory lookup', () => {
 });
 
 testSuite('handles subdirectory lookup', () => {
-  const expected = path.normalize(`${process.cwd()}/example/nested/foo.styl`);
+  const expected = path.join(process.cwd(), '/example/nested/foo.styl');
   const actual = lookup({
     dependency: 'nested/foo',
     filename: 'example/another.styl',
@@ -94,7 +94,7 @@ testSuite('handles subdirectory lookup', () => {
 });
 
 testSuite('handles extensionless lookup', () => {
-  const expected = path.normalize(`${process.cwd()}/example/another.styl`);
+  const expected = path.join(process.cwd(), '/example/another.styl');
   const actual = lookup({
     dependency: 'another',
     filename: 'example/main.styl',
@@ -105,7 +105,7 @@ testSuite('handles extensionless lookup', () => {
 });
 
 testSuite('handles extensioned lookup', () => {
-  const expected = path.normalize(`${process.cwd()}/example/styles.styl`);
+  const expected = path.join(process.cwd(), '/example/styles.styl');
   const actual = lookup({
     dependency: 'styles.styl',
     filename: 'example/main.styl',
