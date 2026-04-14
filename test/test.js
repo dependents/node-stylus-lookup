@@ -115,6 +115,27 @@ testSuite('handles extensioned lookup', () => {
   assert.is(actual, expected);
 });
 
+testSuite('resolves dependency when path.resolve(filename, dependency) exists', () => {
+  const expected = path.join(process.cwd(), '/example/blueprint/index.styl');
+  const actual = lookup({
+    dependency: 'index.styl',
+    filename: 'example/blueprint',
+    directory: 'example'
+  });
+
+  assert.is(actual, expected);
+});
+
+testSuite('returns empty string for unresolvable dependency', () => {
+  const actual = lookup({
+    dependency: 'nonexistent',
+    filename: 'example/main.styl',
+    directory: 'example'
+  });
+
+  assert.is(actual, '');
+});
+
 testSuite.skip('supports globbing imports');
 testSuite.skip('supports additional path lookups');
 
