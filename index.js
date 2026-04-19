@@ -1,8 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const { debuglog } = require('util');
+const fs = require('node:fs');
+const path = require('node:path');
+const { debuglog } = require('node:util');
 
 const debug = debuglog('stylus-lookup');
 
