@@ -1,11 +1,10 @@
-'use strict';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { suite } from 'uvu';
+import * as assert from 'uvu/assert';
+import lookup from '../index.js';
 
-const path = require('node:path');
-const { suite } = require('uvu');
-const assert = require('uvu/assert');
-const lookup = require('../index.js');
-
-const fixtures = (...parts) => path.join(__dirname, 'fixtures', ...parts);
+const fixtures = (...parts) => fileURLToPath(new URL(path.join('fixtures', ...parts), import.meta.url));
 
 const testSuite = suite('stylus-lookup');
 

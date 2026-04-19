@@ -19,6 +19,20 @@ partials using the `index.styl` resolution.
 
 ## Usage
 
+ESM:
+
+```js
+import stylusLookup from 'stylus-lookup';
+
+stylusLookup({
+  dependency: 'foo',
+  filename: 'path/to/file',
+  directory: 'path/to/all/files'
+});
+```
+
+CJS:
+
 ```js
 const stylusLookup = require('stylus-lookup');
 
@@ -37,7 +51,7 @@ stylusLookup({
 Example:
 
 ```js
-const stylusLookup = require('stylus-lookup');
+import stylusLookup from 'stylus-lookup';
 
 stylusLookup({
   dependency: 'variables',
