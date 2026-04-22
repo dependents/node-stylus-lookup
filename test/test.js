@@ -1,128 +1,107 @@
 'use strict';
 
 const path = require('path');
-const process = require('process');
-const mock = require('mock-fs');
 const { suite } = require('uvu');
 const assert = require('uvu/assert');
 const lookup = require('../index.js');
 
+const fixtures = (...parts) => path.join(__dirname, 'fixtures', ...parts);
+
 const testSuite = suite('stylus-lookup');
-
-testSuite.before.each(() => {
-  mock({
-    example: {
-      'main.styl': '@import "blueprint"; @require "another"; @require "styles.styl"',
-      'another.styl': '@import "nested/foo"',
-      'styles.styl': '@import "styles2.css"',
-      'styles2.css': '',
-      blueprint: {
-        'index.styl': ''
-      },
-      nested: {
-        'foo.styl': ''
-      }
-    }
-  });
-});
-
-testSuite.after.each(() => {
-  mock.restore();
-});
 
 testSuite('throws if dependency is not supplied', () => {
   assert.throws(() => lookup({
-    filename: 'example/baz.styl',
-    directory: 'example'
+    filename: 'test/fixtures/baz.styl',
+    directory: 'test/fixtures'
   }), err => err instanceof Error && err.message === 'dependency is not supplied');
 });
 
 testSuite('throws if filename is not supplied', () => {
   assert.throws(() => lookup({
     dependency: 'blueprint',
-    directory: 'example'
+    directory: 'test/fixtures'
   }), err => err instanceof Error && err.message === 'filename is not supplied');
 });
 
 testSuite('throws if directory is not supplied', () => {
   assert.throws(() => lookup({
     dependency: 'blueprint',
-    filename: 'example/baz.styl'
+    filename: 'test/fixtures/baz.styl'
   }), err => err instanceof Error && err.message === 'directory is not supplied');
 });
 
 testSuite('handles index.styl lookup', () => {
-  const expected = path.join(process.cwd(), '/example/blueprint/index.styl');
+  const expected = fixtures('blueprint', 'index.styl');
   const actual = lookup({
     dependency: 'blueprint',
-    filename: 'example/styles.styl',
-    directory: 'example'
+    filename: fixtures('styles.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
 });
 
 testSuite('handles .css lookups', () => {
-  const expected = path.join(process.cwd(), '/example/styles2.css');
+  const expected = fixtures('styles2.css');
   const actual = lookup({
     dependency: 'styles2.css',
-    filename: 'example/styles.styl',
-    directory: 'example'
+    filename: fixtures('styles.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
 });
 
 testSuite('handles same directory lookup', () => {
-  const expected = path.join(process.cwd(), '/example/another.styl');
+  const expected = fixtures('another.styl');
   const actual = lookup({
     dependency: 'another',
-    filename: 'example/main.styl',
-    directory: 'example'
+    filename: fixtures('main.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
 });
 
 testSuite('handles subdirectory lookup', () => {
-  const expected = path.join(process.cwd(), '/example/nested/foo.styl');
+  const expected = fixtures('nested', 'foo.styl');
   const actual = lookup({
     dependency: 'nested/foo',
-    filename: 'example/another.styl',
-    directory: 'example'
+    filename: fixtures('another.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
 });
 
 testSuite('handles extensionless lookup', () => {
-  const expected = path.join(process.cwd(), '/example/another.styl');
+  const expected = fixtures('another.styl');
   const actual = lookup({
     dependency: 'another',
-    filename: 'example/main.styl',
-    directory: 'example'
+    filename: fixtures('main.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
 });
 
 testSuite('handles extensioned lookup', () => {
-  const expected = path.join(process.cwd(), '/example/styles.styl');
+  const expected = fixtures('styles.styl');
   const actual = lookup({
     dependency: 'styles.styl',
-    filename: 'example/main.styl',
-    directory: 'example'
+    filename: fixtures('main.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
 });
 
 testSuite('resolves dependency when path.resolve(filename, dependency) exists', () => {
-  const expected = path.join(process.cwd(), '/example/blueprint/index.styl');
+  const expected = fixtures('blueprint', 'index.styl');
   const actual = lookup({
     dependency: 'index.styl',
-    filename: 'example/blueprint',
-    directory: 'example'
+    filename: fixtures('blueprint'),
+    directory: fixtures()
   });
 
   assert.is(actual, expected);
@@ -131,8 +110,8 @@ testSuite('resolves dependency when path.resolve(filename, dependency) exists', 
 testSuite('returns empty string for unresolvable dependency', () => {
   const actual = lookup({
     dependency: 'nonexistent',
-    filename: 'example/main.styl',
-    directory: 'example'
+    filename: fixtures('main.styl'),
+    directory: fixtures()
   });
 
   assert.is(actual, '');
