@@ -8,13 +8,18 @@ const debug = debuglog('stylus-lookup');
 
 /**
  * Determines the resolved dependency path according to
- * the Stylus compiler's dependency lookup behavior
+ * the Stylus compiler's dependency lookup behavior.
+ *
+ * Resolution order:
+ * 1. Relative to `filename`
+ * 2. Relative to the directory containing `filename`
+ * 3. As an `index.styl` inside a subdirectory relative to `filename`'s directory
  *
  * @param  {Object} options
- * @param  {String} options.dependency - the import name
- * @param  {String} options.filename - the file containing the import
- * @param  {String} options.directory - the location of all stylus files
- * @return {String}
+ * @param  {String} options.dependency  - The import/require name (e.g. `'variables'` or `'partials/reset'`)
+ * @param  {String} options.filename    - Absolute or relative path to the file that contains the import
+ * @param  {String} options.directory   - Root directory of all Stylus files (reserved; not yet used in resolution)
+ * @return {String} The resolved absolute path to the dependency file, or an empty string if it cannot be found
  */
 module.exports = function({ dependency, filename, directory } = {}) {
   if (dependency === undefined) throw new Error('dependency is not supplied');
@@ -28,10 +33,10 @@ module.exports = function({ dependency, filename, directory } = {}) {
   debug(`directory: ${directory}`);
 
   // Use the file's extension if necessary
-  const ext = path.extname(dependency) ? '' : path.extname(filename);
+  const extension = path.extname(dependency) ? '' : path.extname(filename);
 
   if (!path.isAbsolute(dependency)) {
-    const resolved = path.resolve(filename, dependency) + ext;
+    const resolved = path.resolve(filename, dependency) + extension;
 
     debug(`resolved relative dependency: ${resolved}`);
 
@@ -40,7 +45,7 @@ module.exports = function({ dependency, filename, directory } = {}) {
     debug('resolved file does not exist');
   }
 
-  const sameDir = path.resolve(fileDir, dependency) + ext;
+  const sameDir = path.resolve(fileDir, dependency) + extension;
   debug(`resolving dependency about the parent file's directory: ${sameDir}`);
 
   if (fs.existsSync(sameDir)) return sameDir;
