@@ -12,8 +12,8 @@ program
   .version(version)
   .argument('<path>', 'the path to partial/dependency to examine')
   .usage('[options] <path>')
-  .option('-f, --filename [path]', 'file containing the dependency')
-  .option('-d, --directory [path]', 'location of all stylus files')
+  .option('-f, --filename <path>', 'file containing the dependency')
+  .option('-d, --directory <path>', 'location of all stylus files')
   .showHelpAfterError()
   .parse();
 

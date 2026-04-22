@@ -51,10 +51,22 @@ and that all of the other stylus files are located within `app/styles`.
 
 ## CLI
 
-Assumes a global install of stylus-lookup with `npm install -g stylus-lookup`
+Assumes a global install of `stylus-lookup` with `npm install -g stylus-lookup`
 
 ```sh
-stylus-lookup [options] path/to/file
+stylus-lookup [options] <dependency>
+```
+
+| Option | Description |
+|---|---|
+| `-f, --filename <path>` | File containing the import/require |
+| `-d, --directory <path>` | Root location of all Stylus files |
+
+Example:
+
+```sh
+stylus-lookup --filename app/styles/styles.styl --directory app/styles variables
+# yields app/styles/variables.styl
 ```
 
 Run `stylus-lookup --help` to see all the options.
