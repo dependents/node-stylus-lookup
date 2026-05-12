@@ -2,7 +2,10 @@
   "name": "stylus-lookup",
   "version": "6.1.2",
   "description": "Get the file associated with an imported/required Stylus partial",
-  "main": "index.js",
+  "type": "module",
+	"exports": {
+		".": "./index.js"
+	},
   "files": [
     "bin/cli.js",
     "index.js"
@@ -13,7 +16,7 @@
   "scripts": {
     "lint": "xo",
     "fix": "xo --fix",
-    "uvu": "uvu test -i fixtures",
+    "uvu": "uvu test",
     "test": "npm run lint && npm run uvu",
     "test:ci": "c8 npm run uvu"
   },
