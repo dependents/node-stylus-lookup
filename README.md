@@ -8,19 +8,30 @@
 
 This module replaces the Stylus compiler's lookup algorithm for resolving a partial's path.
 
-* Handles same directory lookups,
-partials with or without extensions, partials within subdirectories,
-partials with the `.styl` or `.css` in the name,
-partials using the `index.styl` resolution.
-
+* Handles same directory lookups, partials with or without extensions, partials within subdirectories,
+partials with the `.styl` or `.css` in the name, partials using the `index.styl` resolution.
 * **Does not** currently support glob imports or the use of additional paths. PRs welcome.
 
 *Originally built for [Dependents](https://github.com/dependents/Dependents)*
 
 ## Usage
 
+ESM:
+
 ```js
-const stylusLookup = require('stylus-lookup');
+import stylusLookup from 'stylus-lookup';
+
+stylusLookup({
+  dependency: 'foo',
+  filename: 'path/to/file',
+  directory: 'path/to/all/files'
+});
+```
+
+CJS:
+
+```js
+const { default: stylusLookup } = require('stylus-lookup');
 
 stylusLookup({
   dependency: 'foo',
@@ -37,7 +48,7 @@ stylusLookup({
 Example:
 
 ```js
-const stylusLookup = require('stylus-lookup');
+import stylusLookup from 'stylus-lookup';
 
 stylusLookup({
   dependency: 'variables',

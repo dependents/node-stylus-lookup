@@ -1,8 +1,6 @@
-'use strict';
-
-const fs = require('node:fs');
-const path = require('node:path');
-const { debuglog } = require('node:util');
+import fs from 'node:fs';
+import path from 'node:path';
+import { debuglog } from 'node:util';
 
 const debug = debuglog('stylus-lookup');
 
@@ -21,7 +19,7 @@ const debug = debuglog('stylus-lookup');
  * @param  {String} options.directory   - Root directory of all Stylus files (reserved; not yet used in resolution)
  * @return {String} The resolved absolute path to the dependency file, or an empty string if it cannot be found
  */
-module.exports = function({ dependency, filename, directory } = {}) {
+export default function lookup({ dependency, filename, directory } = {}) {
   if (dependency === undefined) throw new Error('dependency is not supplied');
   if (filename === undefined) throw new Error('filename is not supplied');
   if (directory === undefined) throw new Error('directory is not supplied');
@@ -62,4 +60,4 @@ module.exports = function({ dependency, filename, directory } = {}) {
   debug('could not resolve the dependency');
 
   return '';
-};
+}
