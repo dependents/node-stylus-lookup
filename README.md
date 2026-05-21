@@ -16,21 +16,10 @@ partials with the `.styl` or `.css` in the name, partials using the `index.styl`
 
 ## Usage
 
-ESM:
-
 ```js
+// ESM
 import stylusLookup from 'stylus-lookup';
-
-stylusLookup({
-  dependency: 'foo',
-  filename: 'path/to/file',
-  directory: 'path/to/all/files'
-});
-```
-
-CJS:
-
-```js
+// CommonJS
 const { default: stylusLookup } = require('stylus-lookup');
 
 stylusLookup({
