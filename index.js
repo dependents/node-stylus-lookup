@@ -5,19 +5,15 @@ import { debuglog } from 'node:util';
 const debug = debuglog('stylus-lookup');
 
 /**
- * Determines the resolved dependency path according to
- * the Stylus compiler's dependency lookup behavior.
- *
- * Resolution order:
+ * Resolves a Stylus dependency path using the compiler's lookup order:
  * 1. Relative to `filename`
  * 2. Relative to the directory containing `filename`
- * 3. As an `index.styl` inside a subdirectory relative to `filename`'s directory
+ * 3. As `index.styl` inside a matching subdirectory
  *
- * @param  {Object} options
- * @param  {String} options.dependency  - The import/require name (e.g. `'variables'` or `'partials/reset'`)
- * @param  {String} options.filename    - Absolute or relative path to the file that contains the import
- * @param  {String} options.directory   - Root directory of all Stylus files (reserved; not yet used in resolution)
- * @return {String} The resolved absolute path to the dependency file, or an empty string if it cannot be found
+ * @param  {string} options.dependency  Import/require name (e.g. `'variables'` or `'partials/reset'`)
+ * @param  {string} options.filename    Path to the file containing the import
+ * @param  {string} options.directory   Root Stylus directory (reserved; not used in resolution)
+ * @return {string} Resolved absolute path, or empty string if not found
  */
 export default function lookup({ dependency, filename, directory } = {}) {
   if (dependency === undefined) throw new Error('dependency is not supplied');
