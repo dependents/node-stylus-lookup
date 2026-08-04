@@ -43,8 +43,8 @@
     "commander": "^14.0.3"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.7",
-    "vitest": "^4.1.7",
+    "@vitest/coverage-v8": "^4.1.10",
+    "vitest": "^4.1.10",
     "xo": "^2.0.2"
   }
 }
